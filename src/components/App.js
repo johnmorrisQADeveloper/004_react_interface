@@ -63,9 +63,9 @@ export default class App extends Component {
             <div className="col-md-12 bg-white">
               <div className="container">
                 {listItems}
-                <div><AddAppointments /></div>
-                <div><SearchAppointments /></div>
-                <div><ListAppointments /></div>
+                <AddAppointments />
+                <SearchAppointments />
+                <ListAppointments />
               </div>
             </div>
           </div>
