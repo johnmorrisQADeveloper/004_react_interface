@@ -36,14 +36,20 @@ import React, { Component } from 'react'
 export default class App extends Component {
   state = {
     myName: 'JohnMorris',
-    myAppointments: []
+    myAppointments: [],
+    lastIndex: 0
   }
   componentDidMount() {
     fetch('./data.json')
       .then(response => response.json())
       .then(result => {
+        const apts = result.map(item => {
+          item.aptId = this.state.lastIndex
+          this.setState({ lastIndex: this.state.lastIndex + 1 })
+          return item
+        })
         this.setState({
-          myAppointments: result
+          myAppointments: apts
         })
       })
   }
@@ -56,7 +62,7 @@ export default class App extends Component {
               <div className="container">
                 <AddAppointments />
                 <SearchAppointments />
-                <ListAppointments myAppointments={this.state.myAppointments}/>
+                <ListAppointments myAppointments={this.state.myAppointments} />
               </div>
             </div>
           </div>

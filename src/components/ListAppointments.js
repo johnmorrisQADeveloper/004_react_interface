@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 
 export default class ListAppointments extends Component {
   render() {
-    const listItems = this.props.myAppointments.map(item => {
-      return (
-        <div>{item.petName}</div>
-      )
-    })
+    // const listItems = this.props.myAppointments.map(item => {
+    //   return (
+    //     <div>{item.petName}</div>
+    //   )
+    // })
     return (
       <div className="appointment-list item-list mb-3">
         {this.props.myAppointments.map(item => (
-          <div className="pet-item col media py-3">
+          <div className="pet-item col media py-3" key={item.aptId}>
             <div className="mr-3">
               <button className="pet-delete btn btn-sm btn-danger">X</button>
             </div>
