@@ -36,30 +36,32 @@ import React, { Component } from 'react'
 export default class App extends Component {
   state = {
     myName: 'JohnMorris',
-    myAppointments: ''
+    myAppointments: []
   }
   componentDidMount() {
-    // once application all gets assembled, the data.json file will be in the same folder as the current document.
     fetch('./data.json')
-    .then(response  => response.json())
-    .then(result => {
-
-      const apts = result.map(item => {
-        return item
+      .then(response => response.json())
+      .then(result => {
+        this.setState({
+          myAppointments: result
+        })
       })
-      this.setState({
-        myAppointments: apts
-      })
-    })
   }
   render() {
+    const listItems = this.state.myAppointments.map((item, index) => {
+      return (
+        <div key={index}>
+          {item.petName}
+        </div>
+      )
+    })
     return (
       <main className="page bg-white" id="petratings">
         <div className="container">
           <div className="row">
             <div className="col-md-12 bg-white">
               <div className="container">
-                {this.state.myName}
+                {listItems}
                 <div><AddAppointments /></div>
                 <div><SearchAppointments /></div>
                 <div><ListAppointments /></div>
