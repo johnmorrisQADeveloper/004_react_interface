@@ -33,10 +33,24 @@ import AddAppointments from './AddAppointments';
 import SearchAppointments from './SearchAppointments';
 import ListAppointments from './ListAppointments';
 import React, { Component } from 'react'
-
 export default class App extends Component {
   state = {
-    myName: 'JohnMorris'
+    myName: 'JohnMorris',
+    myAppointments: ''
+  }
+  componentDidMount() {
+    // once application all gets assembled, the data.json file will be in the same folder as the current document.
+    fetch('./data.json')
+    .then(response  => response.json())
+    .then(result => {
+
+      const apts = result.map(item => {
+        return item
+      })
+      this.setState({
+        myAppointments: apts
+      })
+    })
   }
   render() {
     return (
