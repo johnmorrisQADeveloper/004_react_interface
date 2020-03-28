@@ -51,7 +51,8 @@ export default class App extends Component {
     const listItems = this.state.myAppointments.map((item, index) => {
       return (
         <div key={index}>
-          {item.petName}
+          <div> {item.petName}</div>
+          <div> {item.ownerName}</div>
         </div>
       )
     })
