@@ -2,6 +2,22 @@ import React, { Component } from 'react'
 import { FaPlus } from 'react-icons/fa'
 
 export default class AddAppointments extends Component {
+  state = {
+    petName: '',
+    ownerName: '',
+    aptDate: '',
+    aptTime: '',
+    aptNotes: ''
+  }
+
+  handleChange = (e) => {
+    const target = e.target
+    const value = target.value
+    const name = target.name
+    this.setState({
+      [name]: value
+    })
+  }
   render() {
     return (
       <div className={
@@ -30,6 +46,8 @@ export default class AddAppointments extends Component {
                   className="form-control"
                   name="petName"
                   placeholder="Pet's Name"
+                  value={this.state.petName}
+                  onChange={this.handleChange}
                 />
               </div>
             </div>
@@ -47,6 +65,8 @@ export default class AddAppointments extends Component {
                   className="form-control"
                   name="ownerName"
                   placeholder="Owner's Name"
+                  value={this.state.ownerName}
+                  onChange={this.handleChange}
                 />
               </div>
             </div>
@@ -64,6 +84,8 @@ export default class AddAppointments extends Component {
                   className="form-control"
                   name="aptDate"
                   id="aptDate"
+                  value={this.state.aptDate}
+                  onChange={this.handleChange}
                 />
               </div>
               <label
@@ -78,6 +100,8 @@ export default class AddAppointments extends Component {
                   className="form-control"
                   name="aptTime"
                   id="aptTime"
+                  value={this.state.aptTime}
+                  onChange={this.handleChange}
                 />
               </div>
             </div>
@@ -94,6 +118,8 @@ export default class AddAppointments extends Component {
                   name="aptNotes"
                   id="aptNotes"
                   placeholder="Appointment Notes"
+                  value={this.state.aptNotes}
+                  onChange={this.handleChange}
                 />
               </div>
             </div>
