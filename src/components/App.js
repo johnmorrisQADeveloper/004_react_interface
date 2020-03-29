@@ -27,6 +27,12 @@ export default class App extends Component {
         })
       })
   }
+  changeOrder = (order, dir) => {
+    this.setState({
+      orderBy: order,
+      orderDir: dir
+    })
+  }
   deleteAppointment = (apt) => {
     let tempApts = this.state.myAppointments
     tempApts = without(tempApts, apt)
@@ -79,6 +85,7 @@ export default class App extends Component {
                 <SearchAppointments 
                   orderBy={this.state.orderBy}
                   orderDir={this.state.orderDir}
+                  changeOrder={this.changeOrder}
                 />
                 <ListAppointments
                   myAppointments={filteredApts}
