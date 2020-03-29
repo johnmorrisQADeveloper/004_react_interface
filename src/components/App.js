@@ -58,6 +58,7 @@ export default class App extends Component {
   state = {
     myName: 'JohnMorris',
     myAppointments: [],
+    formDisplay: false,
     lastIndex: 0
   }
   componentDidMount() {
@@ -88,7 +89,9 @@ export default class App extends Component {
           <div className="row">
             <div className="col-md-12 bg-white">
               <div className="container">
-                <AddAppointments />
+                <AddAppointments 
+                  formDisplay={this.state.formDisplay}
+                />
                 <SearchAppointments />
                 <ListAppointments
                   myAppointments={this.state.myAppointments}
