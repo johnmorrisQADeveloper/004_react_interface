@@ -9,6 +9,8 @@ export default class App extends Component {
     myName: 'JohnMorris',
     myAppointments: [],
     formDisplay: false,
+    orderBy: 'petName',
+    orderDir: 'asc',
     lastIndex: 0
   }
   componentDidMount() {
@@ -47,6 +49,22 @@ export default class App extends Component {
     })
   }
   render() {
+    let order
+    let filteredApts = this.state.myAppointments
+    if (this.state.orderDir === 'asc') {
+      order = 1
+    } else {
+      order = -1
+    }
+    filteredApts.sort((a,b) => {
+      if (a[this.state.orderBy].toLowerCase() < 
+          b[this.state.orderBy].toLowerCase()
+      ) {
+        return -1 * order
+      } else {
+        return 1 * order
+      }
+    })
     return (
       <main className="page bg-white" id="petratings">
         <div className="container">
@@ -60,7 +78,7 @@ export default class App extends Component {
                 />
                 <SearchAppointments />
                 <ListAppointments
-                  myAppointments={this.state.myAppointments}
+                  myAppointments={filteredApts}
                   deleteAppointment={this.deleteAppointment}
                 />
               </div>
