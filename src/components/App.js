@@ -37,6 +37,15 @@ export default class App extends Component {
       formDisplay: !this.state.formDisplay
     })
   }
+  AddAppointments = (apt) => {
+    let tempApts = this.state.myAppointments
+    apt.aptId = this.state.lastIndex
+    this.state.lastIndex ++
+    tempApts.unshift(apt)
+    this.setState({
+      myAppointments: tempApts
+    })
+  }
   render() {
     return (
       <main className="page bg-white" id="petratings">
@@ -47,6 +56,7 @@ export default class App extends Component {
                 <AddAppointments 
                   formDisplay={this.state.formDisplay}
                   toggleForm={this.toggleForm}
+                  AddAppointments={this.AddAppointments}
                 />
                 <SearchAppointments />
                 <ListAppointments
