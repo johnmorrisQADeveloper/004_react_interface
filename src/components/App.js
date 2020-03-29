@@ -1,53 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import '../css/App.css';
-// import AddAppointments from './AddAppointments';
-// import SearchAppointments from './SearchAppointments';
-// import ListAppointments from './ListAppointments';
-// import {without} from 'lodash'
-// function App() {
-//   const [myAppointments, setmyAppointments] = useState([])
-//   let [lastIndex, setLastIndex] = useState(0)
-
-//   useEffect(() => {
-//     fetch('./data.json')
-//       .then(response => response.json())
-//       .then(result => {
-//         const apts = result.map(item => {
-//           item.aptId = lastIndex
-//           setLastIndex(lastIndex)
-//           lastIndex++
-//           return item
-//         })
-//         setmyAppointments(apts)
-//       })
-//   }, [lastIndex])
-//   const deleteAppointments = (apt) => {
-//     let tempApts = myAppointments
-//     tempApts = without(tempApts, apt)
-//     // setmyAppointments(tempApts)
-//     console.log(apt)
-//   }
-//   return (
-//     <main className="page bg-white" id="petratings">
-//       <div className="container">
-//         <div className="row">
-//           <div className="col-md-12 bg-white">
-//             <div className="container">
-//               <AddAppointments />
-//               <SearchAppointments />
-//               <ListAppointments
-//                 myAppointments={myAppointments}
-//                 deleteAppointments={deleteAppointments} />
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </main>
-//   );
-// }
-
-// export default App;
-
 import '../css/App.css';
 import AddAppointments from './AddAppointments';
 import SearchAppointments from './SearchAppointments';
@@ -82,6 +32,11 @@ export default class App extends Component {
       myAppointments: tempApts
     })
   }
+  toggleForm = () => {
+    this.setState({
+      formDisplay: !this.state.formDisplay
+    })
+  }
   render() {
     return (
       <main className="page bg-white" id="petratings">
@@ -91,6 +46,7 @@ export default class App extends Component {
               <div className="container">
                 <AddAppointments 
                   formDisplay={this.state.formDisplay}
+                  toggleForm={this.toggleForm}
                 />
                 <SearchAppointments />
                 <ListAppointments
