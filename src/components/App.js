@@ -28,6 +28,11 @@ export default class App extends Component {
         })
       })
   }
+  searchApts = (query) => {
+    this.setState({
+      queryText: query
+    })
+  }
   changeOrder = (order, dir) => {
     this.setState({
       orderBy: order,
@@ -93,6 +98,7 @@ export default class App extends Component {
                   orderBy={this.state.orderBy}
                   orderDir={this.state.orderDir}
                   changeOrder={this.changeOrder}
+                  searchApts={this.searchApts}
                 />
                 <ListAppointments
                   myAppointments={filteredApts}
