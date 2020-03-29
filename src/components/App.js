@@ -3,7 +3,7 @@ import AddAppointments from './AddAppointments';
 import SearchAppointments from './SearchAppointments';
 import ListAppointments from './ListAppointments';
 import React, { Component } from 'react'
-import { without } from "lodash"
+import { without , findIndex} from "lodash"
 export default class App extends Component {
   state = {
     myName: 'JohnMorris',
@@ -27,6 +27,16 @@ export default class App extends Component {
           myAppointments: apts
         })
       })
+  }
+  updateInfo = (name, value, id) => {
+    let tempApts = this.state.myAppointments
+    let aptIndex = findIndex(this.state.myAppointments, {
+      aptId: id
+    })
+    tempApts[aptIndex][name]=value
+    this.setState({
+      myAppointments: tempApts
+    })
   }
   searchApts = (query) => {
     this.setState({
@@ -103,6 +113,7 @@ export default class App extends Component {
                 <ListAppointments
                   myAppointments={filteredApts}
                   deleteAppointment={this.deleteAppointment}
+                  updateInfo={this.updateInfo}
                 />
               </div>
             </div>
