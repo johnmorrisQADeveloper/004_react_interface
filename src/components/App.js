@@ -11,6 +11,7 @@ export default class App extends Component {
     formDisplay: false,
     orderBy: 'petName',
     orderDir: 'asc',
+    queryText: '',
     lastIndex: 0
   }
   componentDidMount() {
@@ -48,7 +49,7 @@ export default class App extends Component {
   AddAppointments = (apt) => {
     let tempApts = this.state.myAppointments
     apt.aptId = this.state.lastIndex
-    this.state.lastIndex ++
+    this.state.lastIndex++
     tempApts.unshift(apt)
     this.setState({
       myAppointments: tempApts
@@ -62,14 +63,20 @@ export default class App extends Component {
     } else {
       order = -1
     }
-    filteredApts.sort((a,b) => {
-      if (a[this.state.orderBy].toLowerCase() < 
-          b[this.state.orderBy].toLowerCase()
+    filteredApts = filteredApts.sort((a, b) => {
+      if (a[this.state.orderBy].toLowerCase() <
+        b[this.state.orderBy].toLowerCase()
       ) {
         return -1 * order
       } else {
         return 1 * order
       }
+    }).filter(eachItem => {
+      return (
+        eachItem['petName'].toLowerCase().includes(this.state.queryText.toLowerCase()) ||
+        eachItem['ownerName'].toLowerCase().includes(this.state.queryText.toLowerCase()) ||
+        eachItem['aptNotes'].toLowerCase().includes(this.state.queryText.toLowerCase())
+      )
     })
     return (
       <main className="page bg-white" id="petratings">
@@ -77,12 +84,12 @@ export default class App extends Component {
           <div className="row">
             <div className="col-md-12 bg-white">
               <div className="container">
-                <AddAppointments 
+                <AddAppointments
                   formDisplay={this.state.formDisplay}
                   toggleForm={this.toggleForm}
                   AddAppointments={this.AddAppointments}
                 />
-                <SearchAppointments 
+                <SearchAppointments
                   orderBy={this.state.orderBy}
                   orderDir={this.state.orderDir}
                   changeOrder={this.changeOrder}
