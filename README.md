@@ -1,5 +1,6 @@
 to squash 
 to squash2
+to squash3
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
